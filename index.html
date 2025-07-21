@@ -202,12 +202,19 @@
             // Global Firebase variables (provided by Canvas environment)
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
             const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? initialAuthToken : null; // Fixed potential typo here
 
             let app, db, auth;
 
             // Initialize Firebase using compat versions
             try {
+                // Check if firebase object is available
+                if (typeof firebase === 'undefined') {
+                    console.error("Firebase library not loaded. Check CDN links.");
+                    showMessageBox("Error", "Firebase library not loaded. Chat functionality may be limited.");
+                    return; // Exit if Firebase is not available
+                }
+
                 app = firebase.initializeApp(firebaseConfig);
                 db = firebase.firestore(app); // Use firebase.firestore for compat
                 auth = firebase.auth(app);   // Use firebase.auth for compat
@@ -421,35 +428,4 @@
 
                 if (needsForward) {
                     console.log("Forwarding to direct contact based on keywords.");
-                    const contactMessage = "It sounds like you're ready to finalize something or need direct assistance! For the fastest response, please message RN Treats directly on WhatsApp: **+1 368 299 0257**. You can also reach us via Instagram: **@RNTREATSYYC**, Phone: **+1-3682990257**, Email: **info@rntreats.com**, or find us on Facebook at **RN Treats**.";
-                    displayMessage(contactMessage, 'ai');
-                } else {
-                    console.log("Sending message to Gemini API.");
-                    const aiResponse = await getGeminiResponse(userMessage);
-                    displayMessage(aiResponse, 'ai');
-                }
-            }
-
-            // Event listeners
-            if (sendButton) {
-                sendButton.addEventListener('click', sendMessage);
-                console.log("Send button event listener attached.");
-            } else {
-                console.error("Send button element not found.");
-            }
-
-            if (chatInput) {
-                chatInput.addEventListener('keypress', function (e) {
-                    if (e.key === 'Enter') {
-                        console.log("Enter key pressed.");
-                        sendMessage();
-                    }
-                });
-                console.log("Chat input keypress listener attached.");
-            } else {
-                console.error("Chat input element not found.");
-            }
-        });
-    </script>
-</body>
-</html>
+                    const contactMess
