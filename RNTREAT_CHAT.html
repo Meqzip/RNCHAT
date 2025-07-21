@@ -1,438 +1,438 @@
-</html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RN Treats AI Assistant</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom styles for Inter font and general body */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .chat-container {
-            max-width: 500px;
-            width: 100%;
-            background-color: #ffffff;
-            border-radius: 1rem; /* Rounded corners */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 70vh; /* Set a fixed height for the chat window */
-        }
-        .chat-header {
-            background-color: #4f46e5; /* Indigo 600 */
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            font-weight: bold;
-            border-top-left-radius: 1rem;
-            border-top-right-radius: 1rem;
-        }
-        .chat-messages {
-            flex-grow: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            background-color: #e2e8f0; /* Light gray for messages area */
-        }
-        .message-bubble {
-            max-width: 80%;
-            padding: 0.75rem 1rem;
-            border-radius: 1rem;
-            margin-bottom: 0.75rem;
-            line-height: 1.5;
-            word-wrap: break-word; /* Ensure long words break */
-        }
-        .user-message {
-            background-color: #6366f1; /* Indigo 500 */
-            color: white;
-            margin-left: auto;
-            border-bottom-right-radius: 0.25rem;
-        }
-        .ai-message {
-            background-color: #ffffff;
-            color: #333;
-            margin-right: auto;
-            border: 1px solid #cbd5e0; /* Border for AI messages */
-            border-bottom-left-radius: 0.25rem;
-        }
-        .chat-input-area {
-            display: flex;
-            padding: 1rem;
-            border-top: 1px solid #cbd5e0; /* Light gray border */
-            background-color: #ffffff;
-        }
-        .chat-input {
-            flex-grow: 1;
-            padding: 0.75rem 1rem;
-            border: 1px solid #cbd5e0;
-            border-radius: 0.75rem;
-            margin-right: 0.75rem;
-            outline: none;
-            font-size: 1rem;
-        }
-        .send-button {
-            background-color: #4f46e5; /* Indigo 600 */
-            color: white;
-            padding: 0.75rem 1.25rem;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        .send-button:hover {
-            background-color: #4338ca; /* Indigo 700 */
-        }
-        .loading-indicator {
-            text-align: center;
-            padding: 1rem;
-            color: #6b7280;
-            font-style: italic;
-        }
-        /* Message box for alerts */
-        .message-box-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s, opacity 0.3s ease;
-        }
-        .message-box-overlay.visible {
-            visibility: visible;
-            opacity: 1;
-        }
-        .message-box {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-        }
-        .message-box h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-        .message-box p {
-            margin-bottom: 1.5rem;
-            color: #555;
-        }
-        .message-box button {
-            background-color: #4f46e5;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
-            font-weight: bold;
-        }
-        .message-box button:hover {
-            background-color: #4338ca;
-        }
-    </style>
+Â  Â  <meta charset="UTF-8">
+Â  Â  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+Â  Â  <title>RN Treats AI Assistant</title>
+Â  Â  <!-- Tailwind CSS CDN -->
+Â  Â  <script src="https://cdn.tailwindcss.com"></script>
+Â  Â  <style>
+Â  Â  Â  Â  /* Custom styles for Inter font and general body */
+Â  Â  Â  Â  body {
+Â  Â  Â  Â  Â  Â  font-family: 'Inter', sans-serif;
+Â  Â  Â  Â  Â  Â  background-color: #f0f4f8; /* Light blue-gray background */
+Â  Â  Â  Â  Â  Â  display: flex;
+Â  Â  Â  Â  Â  Â  justify-content: center;
+Â  Â  Â  Â  Â  Â  align-items: center;
+Â  Â  Â  Â  Â  Â  min-height: 100vh;
+Â  Â  Â  Â  Â  Â  margin: 0;
+Â  Â  Â  Â  Â  Â  padding: 20px;
+Â  Â  Â  Â  Â  Â  box-sizing: border-box;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .chat-container {
+Â  Â  Â  Â  Â  Â  max-width: 500px;
+Â  Â  Â  Â  Â  Â  width: 100%;
+Â  Â  Â  Â  Â  Â  background-color: #ffffff;
+Â  Â  Â  Â  Â  Â  border-radius: 1rem; /* Rounded corners */
+Â  Â  Â  Â  Â  Â  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+Â  Â  Â  Â  Â  Â  overflow: hidden;
+Â  Â  Â  Â  Â  Â  display: flex;
+Â  Â  Â  Â  Â  Â  flex-direction: column;
+Â  Â  Â  Â  Â  Â  height: 70vh; /* Set a fixed height for the chat window */
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .chat-header {
+Â  Â  Â  Â  Â  Â  background-color: #4f46e5; /* Indigo 600 */
+Â  Â  Â  Â  Â  Â  color: white;
+Â  Â  Â  Â  Â  Â  padding: 1rem;
+Â  Â  Â  Â  Â  Â  text-align: center;
+Â  Â  Â  Â  Â  Â  font-weight: bold;
+Â  Â  Â  Â  Â  Â  border-top-left-radius: 1rem;
+Â  Â  Â  Â  Â  Â  border-top-right-radius: 1rem;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .chat-messages {
+Â  Â  Â  Â  Â  Â  flex-grow: 1;
+Â  Â  Â  Â  Â  Â  padding: 1rem;
+Â  Â  Â  Â  Â  Â  overflow-y: auto;
+Â  Â  Â  Â  Â  Â  background-color: #e2e8f0; /* Light gray for messages area */
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .message-bubble {
+Â  Â  Â  Â  Â  Â  max-width: 80%;
+Â  Â  Â  Â  Â  Â  padding: 0.75rem 1rem;
+Â  Â  Â  Â  Â  Â  border-radius: 1rem;
+Â  Â  Â  Â  Â  Â  margin-bottom: 0.75rem;
+Â  Â  Â  Â  Â  Â  line-height: 1.5;
+Â  Â  Â  Â  Â  Â  word-wrap: break-word; /* Ensure long words break */
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .user-message {
+Â  Â  Â  Â  Â  Â  background-color: #6366f1; /* Indigo 500 */
+Â  Â  Â  Â  Â  Â  color: white;
+Â  Â  Â  Â  Â  Â  margin-left: auto;
+Â  Â  Â  Â  Â  Â  border-bottom-right-radius: 0.25rem;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .ai-message {
+Â  Â  Â  Â  Â  Â  background-color: #ffffff;
+Â  Â  Â  Â  Â  Â  color: #333;
+Â  Â  Â  Â  Â  Â  margin-right: auto;
+Â  Â  Â  Â  Â  Â  border: 1px solid #cbd5e0; /* Border for AI messages */
+Â  Â  Â  Â  Â  Â  border-bottom-left-radius: 0.25rem;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .chat-input-area {
+Â  Â  Â  Â  Â  Â  display: flex;
+Â  Â  Â  Â  Â  Â  padding: 1rem;
+Â  Â  Â  Â  Â  Â  border-top: 1px solid #cbd5e0; /* Light gray border */
+Â  Â  Â  Â  Â  Â  background-color: #ffffff;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .chat-input {
+Â  Â  Â  Â  Â  Â  flex-grow: 1;
+Â  Â  Â  Â  Â  Â  padding: 0.75rem 1rem;
+Â  Â  Â  Â  Â  Â  border: 1px solid #cbd5e0;
+Â  Â  Â  Â  Â  Â  border-radius: 0.75rem;
+Â  Â  Â  Â  Â  Â  margin-right: 0.75rem;
+Â  Â  Â  Â  Â  Â  outline: none;
+Â  Â  Â  Â  Â  Â  font-size: 1rem;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .send-button {
+Â  Â  Â  Â  Â  Â  background-color: #4f46e5; /* Indigo 600 */
+Â  Â  Â  Â  Â  Â  color: white;
+Â  Â  Â  Â  Â  Â  padding: 0.75rem 1.25rem;
+Â  Â  Â  Â  Â  Â  border-radius: 0.75rem;
+Â  Â  Â  Â  Â  Â  cursor: pointer;
+Â  Â  Â  Â  Â  Â  transition: background-color 0.2s ease-in-out;
+Â  Â  Â  Â  Â  Â  font-weight: bold;
+Â  Â  Â  Â  Â  Â  display: flex;
+Â  Â  Â  Â  Â  Â  align-items: center;
+Â  Â  Â  Â  Â  Â  justify-content: center;
+Â  Â  Â  Â  Â  Â  gap: 0.5rem;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .send-button:hover {
+Â  Â  Â  Â  Â  Â  background-color: #4338ca; /* Indigo 700 */
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .loading-indicator {
+Â  Â  Â  Â  Â  Â  text-align: center;
+Â  Â  Â  Â  Â  Â  padding: 1rem;
+Â  Â  Â  Â  Â  Â  color: #6b7280;
+Â  Â  Â  Â  Â  Â  font-style: italic;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  /* Message box for alerts */
+Â  Â  Â  Â  .message-box-overlay {
+Â  Â  Â  Â  Â  Â  position: fixed;
+Â  Â  Â  Â  Â  Â  top: 0;
+Â  Â  Â  Â  Â  Â  left: 0;
+Â  Â  Â  Â  Â  Â  width: 100%;
+Â  Â  Â  Â  Â  Â  height: 100%;
+Â  Â  Â  Â  Â  Â  background-color: rgba(0, 0, 0, 0.5);
+Â  Â  Â  Â  Â  Â  display: flex;
+Â  Â  Â  Â  Â  Â  justify-content: center;
+Â  Â  Â  Â  Â  Â  align-items: center;
+Â  Â  Â  Â  Â  Â  z-index: 1000;
+Â  Â  Â  Â  Â  Â  visibility: hidden;
+Â  Â  Â  Â  Â  Â  opacity: 0;
+Â  Â  Â  Â  Â  Â  transition: visibility 0s, opacity 0.3s ease;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .message-box-overlay.visible {
+Â  Â  Â  Â  Â  Â  visibility: visible;
+Â  Â  Â  Â  Â  Â  opacity: 1;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .message-box {
+Â  Â  Â  Â  Â  Â  background-color: white;
+Â  Â  Â  Â  Â  Â  padding: 2rem;
+Â  Â  Â  Â  Â  Â  border-radius: 1rem;
+Â  Â  Â  Â  Â  Â  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+Â  Â  Â  Â  Â  Â  text-align: center;
+Â  Â  Â  Â  Â  Â  max-width: 400px;
+Â  Â  Â  Â  Â  Â  width: 90%;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .message-box h3 {
+Â  Â  Â  Â  Â  Â  font-size: 1.5rem;
+Â  Â  Â  Â  Â  Â  margin-bottom: 1rem;
+Â  Â  Â  Â  Â  Â  color: #333;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .message-box p {
+Â  Â  Â  Â  Â  Â  margin-bottom: 1.5rem;
+Â  Â  Â  Â  Â  Â  color: #555;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .message-box button {
+Â  Â  Â  Â  Â  Â  background-color: #4f46e5;
+Â  Â  Â  Â  Â  Â  color: white;
+Â  Â  Â  Â  Â  Â  padding: 0.75rem 1.5rem;
+Â  Â  Â  Â  Â  Â  border-radius: 0.75rem;
+Â  Â  Â  Â  Â  Â  cursor: pointer;
+Â  Â  Â  Â  Â  Â  transition: background-color 0.2s ease-in-out;
+Â  Â  Â  Â  Â  Â  font-weight: bold;
+Â  Â  Â  Â  }
+Â  Â  Â  Â  .message-box button:hover {
+Â  Â  Â  Â  Â  Â  background-color: #4338ca;
+Â  Â  Â  Â  }
+Â  Â  </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
-            RN Treats AI Assistant
-        </div>
-        <div class="chat-messages" id="chat-messages">
-            <!-- Welcome message -->
-            <div class="message-bubble ai-message">
-                Hello! Welcome to RN Treats. How can I assist you today? Feel free to ask about our products, services, or anything else!
-            </div>
-        </div>
-        <div class="loading-indicator hidden" id="loading-indicator">
-            AI is typing...
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="chat-input" class="chat-input" placeholder="Type your message...">
-            <button id="send-button" class="send-button">
-                Send
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                    <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.917H3.75a.75.75 0 0 0 0 1.5h1.918l-2.432 7.917a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.916.75.75 0 0 0 0-1.236A60.519 60.519 0 0 0 3.478 2.405Z" />
-                </svg>
-            </button>
-        </div>
-    </div>
+Â  Â  <div class="chat-container">
+Â  Â  Â  Â  <div class="chat-header">
+Â  Â  Â  Â  Â  Â  RN Treats AI Assistant
+Â  Â  Â  Â  </div>
+Â  Â  Â  Â  <div class="chat-messages" id="chat-messages">
+Â  Â  Â  Â  Â  Â  <!-- Welcome message -->
+Â  Â  Â  Â  Â  Â  <div class="message-bubble ai-message">
+Â  Â  Â  Â  Â  Â  Â  Â  Hello! Welcome to RN Treats. How can I assist you today? Feel free to ask about our products, services, or anything else!
+Â  Â  Â  Â  Â  Â  </div>
+Â  Â  Â  Â  </div>
+Â  Â  Â  Â  <div class="loading-indicator hidden" id="loading-indicator">
+Â  Â  Â  Â  Â  Â  AI is typing...
+Â  Â  Â  Â  </div>
+Â  Â  Â  Â  <div class="chat-input-area">
+Â  Â  Â  Â  Â  Â  <input type="text" id="chat-input" class="chat-input" placeholder="Type your message...">
+Â  Â  Â  Â  Â  Â  <button id="send-button" class="send-button">
+Â  Â  Â  Â  Â  Â  Â  Â  Send
+Â  Â  Â  Â  Â  Â  Â  Â  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.917H3.75a.75.75 0 0 0 0 1.5h1.918l-2.432 7.917a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.916.75.75 0 0 0 0-1.236A60.519 60.519 0 0 0 3.478 2.405Z" />
+Â  Â  Â  Â  Â  Â  Â  Â  </svg>
+Â  Â  Â  Â  Â  Â  </button>
+Â  Â  Â  Â  </div>
+Â  Â  </div>
 
-    <!-- Custom Message Box -->
-    <div id="message-box-overlay" class="message-box-overlay">
-        <div class="message-box">
-            <h3 id="message-box-title"></h3>
-            <p id="message-box-content"></p>
-            <button id="message-box-ok">OK</button>
-        </div>
-    </div>
+Â  Â  <!-- Custom Message Box -->
+Â  Â  <div id="message-box-overlay" class="message-box-overlay">
+Â  Â  Â  Â  <div class="message-box">
+Â  Â  Â  Â  Â  Â  <h3 id="message-box-title"></h3>
+Â  Â  Â  Â  Â  Â  <p id="message-box-content"></p>
+Â  Â  Â  Â  Â  Â  <button id="message-box-ok">OK</button>
+Â  Â  Â  Â  </div>
+Â  Â  </div>
 
-    <!-- Firebase CDN scripts - loaded globally -->
-    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore-compat.js"></script>
+Â  Â  <!-- Firebase CDN scripts - loaded globally -->
+Â  Â  <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app-compat.js"></script>
+Â  Â  <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-auth-compat.js"></script>
+Â  Â  <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore-compat.js"></script>
 
-    <script>
-        // Wait for the DOM to be fully loaded before running the script
-        document.addEventListener('DOMContentLoaded', async () => {
-            console.log("DOM Content Loaded. Initializing Firebase and chat elements.");
+Â  Â  <script>
+Â  Â  Â  Â  // Wait for the DOM to be fully loaded before running the script
+Â  Â  Â  Â  document.addEventListener('DOMContentLoaded', async () => {
+Â  Â  Â  Â  Â  Â  console.log("DOM Content Loaded. Initializing Firebase and chat elements.");
 
-            // Global Firebase variables (provided by Canvas environment)
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+Â  Â  Â  Â  Â  Â  // Global Firebase variables (provided by Canvas environment)
+Â  Â  Â  Â  Â  Â  const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+Â  Â  Â  Â  Â  Â  const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+Â  Â  Â  Â  Â  Â  const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
-            let app, db, auth;
+Â  Â  Â  Â  Â  Â  let app, db, auth;
 
-            // Initialize Firebase using compat versions
-            try {
-                app = firebase.initializeApp(firebaseConfig);
-                db = firebase.firestore(app); // Use firebase.firestore for compat
-                auth = firebase.auth(app);   // Use firebase.auth for compat
-                console.log("Firebase app initialized.");
+Â  Â  Â  Â  Â  Â  // Initialize Firebase using compat versions
+Â  Â  Â  Â  Â  Â  try {
+Â  Â  Â  Â  Â  Â  Â  Â  app = firebase.initializeApp(firebaseConfig);
+Â  Â  Â  Â  Â  Â  Â  Â  db = firebase.firestore(app); // Use firebase.firestore for compat
+Â  Â  Â  Â  Â  Â  Â  Â  auth = firebase.auth(app); Â  // Use firebase.auth for compat
+Â  Â  Â  Â  Â  Â  Â  Â  console.log("Firebase app initialized.");
 
-                // Sign in with custom token or anonymously
-                if (initialAuthToken) {
-                    await auth.signInWithCustomToken(initialAuthToken)
-                        .then(() => console.log("Firebase signed in with custom token."))
-                        .catch((error) => console.error("Firebase custom token sign-in error:", error));
-                } else {
-                    await auth.signInAnonymously()
-                        .then(() => console.log("Firebase signed in anonymously."))
-                        .catch((error) => console.error("Firebase anonymous sign-in error:", error));
-                }
-            } catch (error) {
-                console.error("Firebase initialization error:", error);
-                showMessageBox("Error", "Failed to initialize Firebase. Chat functionality may be limited.");
-            }
+Â  Â  Â  Â  Â  Â  Â  Â  // Sign in with custom token or anonymously
+Â  Â  Â  Â  Â  Â  Â  Â  if (initialAuthToken) {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  await auth.signInWithCustomToken(initialAuthToken)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  .then(() => console.log("Firebase signed in with custom token."))
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  .catch((error) => console.error("Firebase custom token sign-in error:", error));
+Â  Â  Â  Â  Â  Â  Â  Â  } else {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  await auth.signInAnonymously()
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  .then(() => console.log("Firebase signed in anonymously."))
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  .catch((error) => console.error("Firebase anonymous sign-in error:", error));
+Â  Â  Â  Â  Â  Â  Â  Â  }
+Â  Â  Â  Â  Â  Â  } catch (error) {
+Â  Â  Â  Â  Â  Â  Â  Â  console.error("Firebase initialization error:", error);
+Â  Â  Â  Â  Â  Â  Â  Â  showMessageBox("Error", "Failed to initialize Firebase. Chat functionality may be limited.");
+Â  Â  Â  Â  Â  Â  }
 
-            const chatMessages = document.getElementById('chat-messages');
-            const chatInput = document.getElementById('chat-input');
-            const sendButton = document.getElementById('send-button');
-            const loadingIndicator = document.getElementById('loading-indicator');
+Â  Â  Â  Â  Â  Â  const chatMessages = document.getElementById('chat-messages');
+Â  Â  Â  Â  Â  Â  const chatInput = document.getElementById('chat-input');
+Â  Â  Â  Â  Â  Â  const sendButton = document.getElementById('send-button');
+Â  Â  Â  Â  Â  Â  const loadingIndicator = document.getElementById('loading-indicator');
 
-            // Message Box elements
-            const messageBoxOverlay = document.getElementById('message-box-overlay');
-            const messageBoxTitle = document.getElementById('message-box-title');
-            const messageBoxContent = document.getElementById('message-box-content');
-            const messageBoxOkButton = document.getElementById('message-box-ok');
+Â  Â  Â  Â  Â  Â  // Message Box elements
+Â  Â  Â  Â  Â  Â  const messageBoxOverlay = document.getElementById('message-box-overlay');
+Â  Â  Â  Â  Â  Â  const messageBoxTitle = document.getElementById('message-box-title');
+Â  Â  Â  Â  Â  Â  const messageBoxContent = document.getElementById('message-box-content');
+Â  Â  Â  Â  Â  Â  const messageBoxOkButton = document.getElementById('message-box-ok');
 
-            if (messageBoxOkButton) {
-                messageBoxOkButton.addEventListener('click', () => {
-                    messageBoxOverlay.classList.remove('visible');
-                });
-            } else {
-                console.error("Message box OK button not found.");
-            }
+Â  Â  Â  Â  Â  Â  if (messageBoxOkButton) {
+Â  Â  Â  Â  Â  Â  Â  Â  messageBoxOkButton.addEventListener('click', () => {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  messageBoxOverlay.classList.remove('visible');
+Â  Â  Â  Â  Â  Â  Â  Â  });
+Â  Â  Â  Â  Â  Â  } else {
+Â  Â  Â  Â  Â  Â  Â  Â  console.error("Message box OK button not found.");
+Â  Â  Â  Â  Â  Â  }
 
-            function showMessageBox(title, message) {
-                if (messageBoxTitle && messageBoxContent && messageBoxOverlay) {
-                    messageBoxTitle.textContent = title;
-                    messageBoxContent.textContent = message;
-                    messageBoxOverlay.classList.add('visible');
-                } else {
-                    console.error("Message box elements not found for showing message.");
-                }
-            }
+Â  Â  Â  Â  Â  Â  function showMessageBox(title, message) {
+Â  Â  Â  Â  Â  Â  Â  Â  if (messageBoxTitle && messageBoxContent && messageBoxOverlay) {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  messageBoxTitle.textContent = title;
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  messageBoxContent.textContent = message;
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  messageBoxOverlay.classList.add('visible');
+Â  Â  Â  Â  Â  Â  Â  Â  } else {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  console.error("Message box elements not found for showing message.");
+Â  Â  Â  Â  Â  Â  Â  Â  }
+Â  Â  Â  Â  Â  Â  }
 
-            // Function to display messages in the chat window
-            function displayMessage(message, sender) {
-                const messageBubble = document.createElement('div');
-                messageBubble.classList.add('message-bubble');
-                if (sender === 'user') {
-                    messageBubble.classList.add('user-message');
-                } else {
-                    messageBubble.classList.add('ai-message');
-                }
-                messageBubble.textContent = message;
-                chatMessages.appendChild(messageBubble);
-                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
-            }
+Â  Â  Â  Â  Â  Â  // Function to display messages in the chat window
+Â  Â  Â  Â  Â  Â  function displayMessage(message, sender) {
+Â  Â  Â  Â  Â  Â  Â  Â  const messageBubble = document.createElement('div');
+Â  Â  Â  Â  Â  Â  Â  Â  messageBubble.classList.add('message-bubble');
+Â  Â  Â  Â  Â  Â  Â  Â  if (sender === 'user') {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  messageBubble.classList.add('user-message');
+Â  Â  Â  Â  Â  Â  Â  Â  } else {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  messageBubble.classList.add('ai-message');
+Â  Â  Â  Â  Â  Â  Â  Â  }
+Â  Â  Â  Â  Â  Â  Â  Â  messageBubble.textContent = message;
+Â  Â  Â  Â  Â  Â  Â  Â  chatMessages.appendChild(messageBubble);
+Â  Â  Â  Â  Â  Â  Â  Â  chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+Â  Â  Â  Â  Â  Â  }
 
-            // Function to call the Gemini API
-            async function getGeminiResponse(prompt) {
-                loadingIndicator.classList.remove('hidden');
-                sendButton.disabled = true; // Disable send button while AI is typing
+Â  Â  Â  Â  Â  Â  // Function to call the Gemini API
+Â  Â  Â  Â  Â  Â  async function getGeminiResponse(prompt) {
+Â  Â  Â  Â  Â  Â  Â  Â  loadingIndicator.classList.remove('hidden');
+Â  Â  Â  Â  Â  Â  Â  Â  sendButton.disabled = true; // Disable send button while AI is typing
 
-                // Add RN Treats specific information to the AI's context
-                const rnTreatsInfo = `
-                    RN Treats is a home-based bakery specializing in custom cakes, cupcakes, finger foods, and catering for weddings, birthdays, and all your special events. We're here to bring your vision to life with personalized, handcrafted creations made fresh to order. We proudly offer gluten-free, eggless, vegan, and dairy-free options to suit your dietary needs.
+Â  Â  Â  Â  Â  Â  Â  Â  // Add RN Treats specific information to the AI's context
+Â  Â  Â  Â  Â  Â  Â  Â  const rnTreatsInfo = `
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  RN Treats is a home-based bakery specializing in custom cakes, cupcakes, finger foods, and catering for weddings, birthdays, and all your special events. We're here to bring your vision to life with personalized, handcrafted creations made fresh to order. We proudly offer gluten-free, eggless, vegan, and dairy-free options to suit your dietary needs.
 
-                    **General Ordering Information:**
-                    - All orders must be placed at least one day in advance to ensure the highest quality and freshness.
-                    - Orders will be confirmed and submitted after the deposit is paid.
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  **General Ordering Information:**
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - All orders must be placed at least one day in advance to ensure the highest quality and freshness.
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Orders will be confirmed and submitted after the deposit is paid.
 
-                    **Contact Information:**
-                    - For the fastest response, message us directly on WhatsApp: +1 368 299 0257
-                    - Instagram: @RNTREATSYYC
-                    - Website: www.RNTREATS.com
-                    - Email: info@rntreats.com
-                    - Phone: +1-3682990257 (also WhatsApp)
-                    - Address: 420 Hawkstone Manor Northwest, Calgary, AB, Canada
-                    - Operating Hours: Mon-Sun - 09:00-21:00
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  **Contact Information:**
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - For the fastest response, message us directly on WhatsApp: +1 368 299 0257
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Instagram: @RNTREATSYYC
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Website: www.RNTREATS.com
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Email: info@rntreats.com
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Phone: +1-3682990257 (also WhatsApp)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Address: 420 Hawkstone Manor Northwest, Calgary, AB, Canada
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Operating Hours: Mon-Sun - 09:00-21:00
 
-                    **Custom Cakes:**
-                    - Fresh, Delicious Cakes for Every Occasion.
-                    - Customize your flavor, filling, and size.
-                    - Dietary options available: gluten-free, eggless, vegan, and dairy-free.
-                    - For special designs or custom decorations, please contact us to discuss your vision. Decoration fees depend on complexity.
-                    - For larger cake sizes or complex custom orders not listed, please contact us directly for personalized pricing.
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  **Custom Cakes:**
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Fresh, Delicious Cakes for Every Occasion.
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Customize your flavor, filling, and size.
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Dietary options available: gluten-free, eggless, vegan, and dairy-free.
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - For special designs or custom decorations, please contact us to discuss your vision. Decoration fees depend on complexity.
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - For larger cake sizes or complex custom orders not listed, please contact us directly for personalized pricing.
 
-                    **Cake Flavors:**
-                    - Chocolate, Vanilla, Lemon, Coffee, Saffron, Tiramisu, Carrot, Red Velvet, Orange, Strawberry, Black Forest.
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  **Cake Flavors:**
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Chocolate, Vanilla, Lemon, Coffee, Saffron, Tiramisu, Carrot, Red Velvet, Orange, Strawberry, Black Forest.
 
-                    **Cake Filling Options:**
-                    - Nuts: Almond, Walnut, Pistachio, Hazelnut, Cashew, Peanut
-                    - Fruits: Pineapple, Strawberry, Raspberry, Blueberry, Blackberry, Banana, Cherry
-                    - Sauce/Jam: Lemon Sauce, Custard, Caramel, Nutella, Dulce de Leche
-                    - Chocolate: Chocolate Chips or Crumbs
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  **Cake Filling Options:**
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Nuts: Almond, Walnut, Pistachio, Hazelnut, Cashew, Peanut
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Fruits: Pineapple, Strawberry, Raspberry, Blueberry, Blackberry, Banana, Cherry
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Sauce/Jam: Lemon Sauce, Custard, Caramel, Nutella, Dulce de Leche
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Chocolate: Chocolate Chips or Crumbs
 
-                    **Cake Sizes & Base Prices (No Decoration):**
-                    - 3" (3 layers) – $35 (serves 2)
-                    - 4" (3 layers) – $45 (serves 4)
-                    - 6" (3 layers) – $55 (serves 8)
-                    - 6" (4 layers) – $65 (serves 10)
-                    - 6" (5 layers) – $80 (serves 12)
-                    - 8" (2 layers) – $80 (serves 15)
-                    - 8" (3 layers) – $95 (serves 18)
-                    - 8" (4 layers) – $110 (serves 20)
-                    - 10" (2 layers) – $115 (serves 25)
-                    - 10" (4 layers) – $145 (serves 30)
-                    - 12" (2 layers) – $150 (serves 35)
-                    - 12" (3 layers) – $165 (serves 40)
-                    - 14" (2 layers) – $170 (serves 50)
-                    - 14" (3 layers) – $210 (serves 60)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  **Cake Sizes & Base Prices (No Decoration):**
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 3" (3 layers) Â– $35 (serves 2)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 4" (3 layers) Â– $45 (serves 4)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 6" (3 layers) Â– $55 (serves 8)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 6" (4 layers) Â– $65 (serves 10)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 6" (5 layers) Â– $80 (serves 12)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 8" (2 layers) Â– $80 (serves 15)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 8" (3 layers) Â– $95 (serves 18)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 8" (4 layers) Â– $110 (serves 20)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 10" (2 layers) Â– $115 (serves 25)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 10" (4 layers) Â– $145 (serves 30)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 12" (2 layers) Â– $150 (serves 35)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 12" (3 layers) Â– $165 (serves 40)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 14" (2 layers) Â– $170 (serves 50)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - 14" (3 layers) Â– $210 (serves 60)
 
-                    **Finger Foods Selection & Prices:**
-                    - Ham Roll – $2.5 each
-                    - Ham and Cheese Canapé with Avocado Sauce – $2.5 each
-                    - Tuna and Parsley Canapé – $2.5 each
-                    - Sausage Canapé – $2.5 each
-                    - Spinach and Cheese Börek – $3.5 each
-                    - Coin Pizza – $2.5 each
-                    - Homemade Garlic Bread Roll – $1.5 each
-                    - Homemade Chicken Nuggets – $2.5 each
-                    - Spring Roll with Ham and Cheese – $2.5 each
-                    - Mini Quiche (Vegetable or Bacon) – $3.5 each
-                    - Stuffed Grape Leaves (Dolma) – $2.5 each
-                    - Falafel Balls with Tzatziki Sauce – $2.5 each
-                    - Cheese and Olive Skewers – $3.5 each
-                    - Grilled Chicken Skewers with Vegetables – $5.5 each
-                    - Garlic and Ham Canapé (each bite) – $2.5
-                    - Vegetable Frittata with Fresh Greens (each bite) – $3.5
-                    - Mini Beef Sliders – $4.5 each
-                    - Bruschetta with Tomato & Basil – $2.5 each
-                    - Mozzarella Sticks – $2.5 each
-                    - Stuffed Mushrooms – $3.5 each
-                `;
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  **Finger Foods Selection & Prices:**
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Ham Roll Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Ham and Cheese CanapÃ© with Avocado Sauce Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Tuna and Parsley CanapÃ© Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Sausage CanapÃ© Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Spinach and Cheese BÃ¶rek Â– $3.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Coin Pizza Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Homemade Garlic Bread Roll Â– $1.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Homemade Chicken Nuggets Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Spring Roll with Ham and Cheese Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Mini Quiche (Vegetable or Bacon) Â– $3.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Stuffed Grape Leaves (Dolma) Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Falafel Balls with Tzatziki Sauce Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Cheese and Olive Skewers Â– $3.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Grilled Chicken Skewers with Vegetables Â– $5.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Garlic and Ham CanapÃ© (each bite) Â– $2.5
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Vegetable Frittata with Fresh Greens (each bite) Â– $3.5
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Mini Beef Sliders Â– $4.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Bruschetta with Tomato & Basil Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Mozzarella Sticks Â– $2.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  - Stuffed Mushrooms Â– $3.5 each
+Â  Â  Â  Â  Â  Â  Â  Â  `;
 
-                let chatHistory = [];
-                chatHistory.push({ role: "user", parts: [{ text: `Based on the following information about RN Treats, please answer the user's question. If you cannot answer based on the provided information, state that you don't have that specific detail and suggest they contact RN Treats directly via WhatsApp, Instagram, or Email for personalized assistance.
+Â  Â  Â  Â  Â  Â  Â  Â  let chatHistory = [];
+Â  Â  Â  Â  Â  Â  Â  Â  chatHistory.push({ role: "user", parts: [{ text: `Based on the following information about RN Treats, please answer the user's question. If you cannot answer based on the provided information, state that you don't have that specific detail and suggest they contact RN Treats directly via WhatsApp, Instagram, or Email for personalized assistance.
 
-                RN Treats Information:
-                ${rnTreatsInfo}
+Â  Â  Â  Â  Â  Â  Â  Â  RN Treats Information:
+Â  Â  Â  Â  Â  Â  Â  Â  ${rnTreatsInfo}
 
-                User's question: ${prompt}` }] });
+Â  Â  Â  Â  Â  Â  Â  Â  User's question: ${prompt}` }] });
 
-                const payload = { contents: chatHistory };
-                const apiKey = ""; // Canvas will automatically provide this in runtime
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+Â  Â  Â  Â  Â  Â  Â  Â  const payload = { contents: chatHistory };
+Â  Â  Â  Â  Â  Â  Â  Â  const apiKey = ""; // Canvas will automatically provide this in runtime
+Â  Â  Â  Â  Â  Â  Â  Â  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    const result = await response.json();
+Â  Â  Â  Â  Â  Â  Â  Â  try {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  const response = await fetch(apiUrl, {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  method: 'POST',
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  headers: { 'Content-Type': 'application/json' },
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  body: JSON.stringify(payload)
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  });
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  const result = await response.json();
 
-                    if (result.candidates && result.candidates.length > 0 &&
-                        result.candidates[0].content && result.candidates[0].content.parts &&
-                        result.candidates[0].content.parts.length > 0) {
-                        return result.candidates[0].content.parts[0].text;
-                    } else {
-                        console.error("Unexpected API response structure:", result);
-                        return "I'm sorry, I couldn't get a response from the AI. Please try again.";
-                    }
-                } catch (error) {
-                    console.error("Error calling Gemini API:", error);
-                    return "I'm having trouble connecting right now. Please check your internet connection or try again later.";
-                } finally {
-                    loadingIndicator.classList.add('hidden');
-                    sendButton.disabled = false; // Re-enable send button
-                }
-            }
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  if (result.candidates && result.candidates.length > 0 &&
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  result.candidates[0].content && result.candidates[0].content.parts &&
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  result.candidates[0].content.parts.length > 0) {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  return result.candidates[0].content.parts[0].text;
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  } else {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  console.error("Unexpected API response structure:", result);
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  return "I'm sorry, I couldn't get a response from the AI. Please try again.";
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  }
+Â  Â  Â  Â  Â  Â  Â  Â  } catch (error) {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  console.error("Error calling Gemini API:", error);
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  return "I'm having trouble connecting right now. Please check your internet connection or try again later.";
+Â  Â  Â  Â  Â  Â  Â  Â  } finally {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  loadingIndicator.classList.add('hidden');
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  sendButton.disabled = false; // Re-enable send button
+Â  Â  Â  Â  Â  Â  Â  Â  }
+Â  Â  Â  Â  Â  Â  }
 
-            // Function to handle sending messages
-            async function sendMessage() {
-                console.log("sendMessage function triggered.");
-                const userMessage = chatInput.value.trim();
-                if (userMessage === '') {
-                    console.log("User message is empty, not sending.");
-                    return;
-                }
+Â  Â  Â  Â  Â  Â  // Function to handle sending messages
+Â  Â  Â  Â  Â  Â  async function sendMessage() {
+Â  Â  Â  Â  Â  Â  Â  Â  console.log("sendMessage function triggered.");
+Â  Â  Â  Â  Â  Â  Â  Â  const userMessage = chatInput.value.trim();
+Â  Â  Â  Â  Â  Â  Â  Â  if (userMessage === '') {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  console.log("User message is empty, not sending.");
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  return;
+Â  Â  Â  Â  Â  Â  Â  Â  }
 
-                displayMessage(userMessage, 'user');
-                chatInput.value = ''; // Clear input
+Â  Â  Â  Â  Â  Â  Â  Â  displayMessage(userMessage, 'user');
+Â  Â  Â  Â  Â  Â  Â  Â  chatInput.value = ''; // Clear input
 
-                // Check for keywords to "forward" to the user
-                const forwardKeywords = ['finalize', 'book', 'order', 'contact', 'speak to a person', 'talk to someone', 'need help', 'whatsapp', 'email', 'instagram', 'phone'];
-                const needsForward = forwardKeywords.some(keyword => userMessage.toLowerCase().includes(keyword));
+Â  Â  Â  Â  Â  Â  Â  Â  // Check for keywords to "forward" to the user
+Â  Â  Â  Â  Â  Â  Â  Â  const forwardKeywords = ['finalize', 'book', 'order', 'contact', 'speak to a person', 'talk to someone', 'need help', 'whatsapp', 'email', 'instagram', 'phone'];
+Â  Â  Â  Â  Â  Â  Â  Â  const needsForward = forwardKeywords.some(keyword => userMessage.toLowerCase().includes(keyword));
 
-                if (needsForward) {
-                    console.log("Forwarding to direct contact based on keywords.");
-                    const contactMessage = "It sounds like you're ready to finalize something or need direct assistance! For the fastest response, please message RN Treats directly on WhatsApp: **+1 368 299 0257**. You can also reach us via Instagram: **@RNTREATSYYC** or Email: **info@rntreats.com**.";
-                    displayMessage(contactMessage, 'ai');
-                } else {
-                    console.log("Sending message to Gemini API.");
-                    const aiResponse = await getGeminiResponse(userMessage);
-                    displayMessage(aiResponse, 'ai');
-                }
-            }
+Â  Â  Â  Â  Â  Â  Â  Â  if (needsForward) {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  console.log("Forwarding to direct contact based on keywords.");
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  const contactMessage = "It sounds like you're ready to finalize something or need direct assistance! For the fastest response, please message RN Treats directly on WhatsApp: **+1 368 299 0257**. You can also reach us via Instagram: **@RNTREATSYYC** or Email: **info@rntreats.com**.";
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  displayMessage(contactMessage, 'ai');
+Â  Â  Â  Â  Â  Â  Â  Â  } else {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  console.log("Sending message to Gemini API.");
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  const aiResponse = await getGeminiResponse(userMessage);
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  displayMessage(aiResponse, 'ai');
+Â  Â  Â  Â  Â  Â  Â  Â  }
+Â  Â  Â  Â  Â  Â  }
 
-            // Event listeners
-            if (sendButton) {
-                sendButton.addEventListener('click', sendMessage);
-                console.log("Send button event listener attached.");
-            } else {
-                console.error("Send button element not found.");
-            }
+Â  Â  Â  Â  Â  Â  // Event listeners
+Â  Â  Â  Â  Â  Â  if (sendButton) {
+Â  Â  Â  Â  Â  Â  Â  Â  sendButton.addEventListener('click', sendMessage);
+Â  Â  Â  Â  Â  Â  Â  Â  console.log("Send button event listener attached.");
+Â  Â  Â  Â  Â  Â  } else {
+Â  Â  Â  Â  Â  Â  Â  Â  console.error("Send button element not found.");
+Â  Â  Â  Â  Â  Â  }
 
-            if (chatInput) {
-                chatInput.addEventListener('keypress', function (e) {
-                    if (e.key === 'Enter') {
-                        console.log("Enter key pressed.");
-                        sendMessage();
-                    }
-                });
-                console.log("Chat input keypress listener attached.");
-            } else {
-                console.error("Chat input element not found.");
-            }
-        });
-    </script>
+Â  Â  Â  Â  Â  Â  if (chatInput) {
+Â  Â  Â  Â  Â  Â  Â  Â  chatInput.addEventListener('keypress', function (e) {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  if (e.key === 'Enter') {
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  console.log("Enter key pressed.");
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  sendMessage();
+Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  }
+Â  Â  Â  Â  Â  Â  Â  Â  });
+Â  Â  Â  Â  Â  Â  Â  Â  console.log("Chat input keypress listener attached.");
+Â  Â  Â  Â  Â  Â  } else {
+Â  Â  Â  Â  Â  Â  Â  Â  console.error("Chat input element not found.");
+Â  Â  Â  Â  Â  Â  }
+Â  Â  Â  Â  });
+Â  Â  </script>
 </body>
 </html>
 
